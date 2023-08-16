@@ -1,7 +1,7 @@
 import os
 
-BOOK_PATH = 'book/book.txt'
-PAGE_SIZE = 1050
+BOOK_PATH = 'book\\book2.txt'
+PAGE_SIZE = 100  # дефолтное значение 1050
 
 book: dict[int, str] = {}
 
@@ -31,6 +31,11 @@ def _get_part_text(text: str, start: int, size: int) -> tuple[str, int]:
 
 # Функция, формирующая словарь книги
 def prepare_book(path: str) -> None:
+    with open(path, "r", encoding="utf-8") as file:
+        content = file.read()
+        tmp = _get_part_text(content, 0, PAGE_SIZE)
+        book[1] = tmp[0]
+    file.close()
 
     pass
 
@@ -40,6 +45,9 @@ prepare_book(os.path.join(os.getcwd(), BOOK_PATH))
 
 
 if __name__ == '__main__':
+
+    print(book)
+
     text = 'Раз. Два. Три. Четыре. Пять. Прием!'
     # print(*_get_part_text(text, 5, 9), sep='\n')
     # print("---")
