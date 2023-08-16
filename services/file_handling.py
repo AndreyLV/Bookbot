@@ -31,6 +31,7 @@ def _get_part_text(text: str, start: int, size: int) -> tuple[str, int]:
 
 # Функция, формирующая словарь книги
 def prepare_book(path: str) -> None:
+
     pass
 
 
