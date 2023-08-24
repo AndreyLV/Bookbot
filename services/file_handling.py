@@ -1,7 +1,7 @@
 import os
 
-BOOK_PATH = 'book\\book2.txt'
-PAGE_SIZE = 100  # дефолтное значение 1050
+BOOK_PATH = 'book\\book.txt'
+PAGE_SIZE = 1050  # дефолтное значение 1050
 
 book: dict[int, str] = {}
 
@@ -33,10 +33,14 @@ def _get_part_text(text: str, start: int, size: int) -> tuple[str, int]:
 def prepare_book(path: str) -> None:
     with open(path, "r", encoding="utf-8") as file:
         content = file.read()
-        tmp = _get_part_text(content, 0, PAGE_SIZE)
-        book[1] = tmp[0]
-    file.close()
-
+        sum_char: int = 0
+        len_book: int = len(content)
+        number_page: int = 1
+        while (sum_char < len_book):
+            tmp = _get_part_text(content, sum_char, PAGE_SIZE)
+            sum_char += tmp[1]
+            book[number_page] = tmp[0].lstrip().lstrip('\ufeff')
+            number_page += 1
     pass
 
 
